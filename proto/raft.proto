@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+option go_package="/raft";
+
+
+package raft;
+
+// 节点角色请求服务
+service Raft {
+  // 选票请求
+  rpc RequestVote(RequestVoteRequest) returns (RequestVoteResponse);
+  rpc RequestHeart(RequestHeartRequest) returns (RequestHeartResponse);
+}
+
+// 选票请求结构
+message RequestVoteRequest {
+  int32 term = 1;          // 候选人的任期号
+  int32 candidateId = 2;   // 候选人ID
+}
+
+// 选票响应结构
+message RequestVoteResponse {
+  bool voteGranted = 1;    // 是否同意投票
+}
+
+message RequestHeartRequest {
+  int32 term = 1;          // 候选人的任期号
+}
+
+message RequestHeartResponse {
+}
